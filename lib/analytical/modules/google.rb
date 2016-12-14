@@ -41,6 +41,13 @@ module Analytical
         JS
       end
 
+      def identify(*args) # id, options
+        <<-JS.gsub(/^ {10}/, '')
+          ga('set', 'dimension3', id);
+          ga('send', 'pageview');
+        JS
+      end
+
       def event(*args) # name, options, callback
         <<-JS.gsub(/^ {10}/, '')
           ga('send', 'event', name, options && options.action || 'undefined', options && options.label, options && options.value);
