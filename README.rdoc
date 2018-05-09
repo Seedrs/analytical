@@ -20,6 +20,7 @@ Service implementations include:
 * Quantcast[http://www.quantcast.com]
 * MixPanel[http://www.mixpanel.com]
 * Gauges[http://get.gaug.es]
+* Marketing Cloud Collect
 
 == Usage
 
