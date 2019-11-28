@@ -47,7 +47,7 @@ module Analytical
 
       def event(*args) # name, options, callback
         <<-JS.gsub(/^ {10}/, '')
-            ga('send', 'event', name, options && options.action || 'undefined', JSON.stringify(options), (options && (typeof options.value === "number" || "string") &&  !isNaN(parseInt(options.value)) && parseInt(options.value)) || 0);
+          ga('send', 'event', name, options && options.action || 'undefined', JSON.stringify(options), (options && (typeof options.value === "number" || "string") &&  !isNaN(parseInt(options.value)) && parseInt(options.value)) || 0);
         JS
       end
       
