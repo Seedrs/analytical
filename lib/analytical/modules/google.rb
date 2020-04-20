@@ -27,6 +27,10 @@ module Analytical
             if(userId.length > 0) {
               ga('set', 'userId', userId);
             }
+            
+            // Ensure hits are delivered even when the network request is being sent and the page
+            // is being unloaded. This feature is only used when available.
+            ga('set', 'transport', 'beacon');
 
             // Optimizely Universal Analytics Integration Code
             window.optimizely = window.optimizely || [];
