@@ -28,10 +28,9 @@ module Analytical
       def event(*args) # name, options, callback
         <<-JS.gsub(/^ {10}/, '')
           var gtmVariables = {};
-          for (var k in options) {
-            gtmVariables[k] = options[k];
-          }
-          gtmVariables.event = name;
+          
+          gtmVariables.event = options['eventCategory'] + " " + options['eventAction'];
+
           gtmDataLayer.push(gtmVariables);
         JS
       end
