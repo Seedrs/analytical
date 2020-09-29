@@ -30,6 +30,15 @@ module Analytical
           var gtmVariables = {};
           
           gtmVariables.event = options['eventCategory'] + " " + options['eventAction'];
+          
+          try {
+            var eventLabels = JSON.parse(options['eventLabel']);
+            for (var key in eventLabels){
+              gtmVariables[key] = eventLabels[key];
+            }
+          } catch(e) {
+            // We have event without labels and others that are just strings
+          }
 
           gtmDataLayer.push(gtmVariables);
         JS
