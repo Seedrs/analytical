@@ -29,7 +29,9 @@ module Analytical
         <<-JS.gsub(/^ {10}/, '')
           var gtmVariables = {};
           
-          gtmVariables.event = options['eventCategory'] + " " + options['eventAction'];
+          gtmVariables.event = "Integration GA-GTM Event";
+          gtmVariables['eventCategory'] = options['eventCategory'];
+          gtmVariables['eventAction'] = options['eventAction'];
           
           try {
             var eventLabels = JSON.parse(options['eventLabel']);
@@ -44,5 +46,17 @@ module Analytical
         JS
       end
     end
+
+    def track(*args) # name, options, callback
+      <<-JS.gsub(/^ {10}/, '')
+        var gtmVariables = {};
+        
+        gtmVariables.event = "Integration GA-GTM Track";
+        gtmVariables['customTrackPageUrl'] = page;
+        
+        gtmDataLayer.push(gtmVariables);
+      JS
+    end
+  end
   end
 end
