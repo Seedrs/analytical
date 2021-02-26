@@ -45,18 +45,17 @@ module Analytical
           gtmDataLayer.push(gtmVariables);
         JS
       end
-    end
 
-    def track(*args) # name, options, callback
-      <<-JS.gsub(/^ {10}/, '')
-        var gtmVariables = {};
-        
-        gtmVariables.event = "Integration GA-GTM Track";
-        gtmVariables['customTrackPageUrl'] = page;
-        
-        gtmDataLayer.push(gtmVariables);
-      JS
+      def track(*args) # name, options, callback
+        <<-JS.gsub(/^ {10}/, '')
+          var gtmVariables = {};
+          
+          gtmVariables.event = "Integration GA-GTM Track";
+          gtmVariables['customTrackPageUrl'] = page;
+          
+          gtmDataLayer.push(gtmVariables);
+        JS
+      end
     end
-  end
   end
 end
