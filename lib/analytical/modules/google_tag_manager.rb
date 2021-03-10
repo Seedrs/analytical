@@ -32,6 +32,7 @@ module Analytical
           gtmVariables.event = "Integration GA-GTM Event";
           gtmVariables['eventCategory'] = options['eventCategory'];
           gtmVariables['eventAction'] = options['eventAction'];
+          gtmVariables['eventValue'] = options['eventValue'];
           
           try {
             var eventLabels = JSON.parse(options['eventLabel']);
