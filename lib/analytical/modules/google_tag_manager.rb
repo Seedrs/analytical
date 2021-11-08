@@ -33,10 +33,9 @@ module Analytical
           gtmVariables['eventCategory'] = options['eventCategory'];
           gtmVariables['eventAction'] = options['eventAction'];
           gtmVariables['eventValue'] = options['eventValue'];
-
+          gtmVariables['eventLabel'] = options['eventLabel'];
           try {
             var eventLabels = JSON.parse(options['eventLabel']);
-            gtmVariables['eventValue'] = options['eventValue'];
             for (var key in eventLabels){
               gtmVariables[key] = eventLabels[key];
             }
