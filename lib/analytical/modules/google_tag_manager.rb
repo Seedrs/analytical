@@ -28,19 +28,19 @@ module Analytical
       def event(*args) # name, options, callback
         <<-JS.gsub(/^ {10}/, '')
           var gtmVariables = {};
-          
+
           gtmVariables.event = "Integration GA-GTM Event";
           gtmVariables['eventCategory'] = options['eventCategory'];
           gtmVariables['eventAction'] = options['eventAction'];
           gtmVariables['eventValue'] = options['eventValue'];
-          
+          gtmVariables['eventLabel'] = options['eventLabel'];
           try {
             var eventLabels = JSON.parse(options['eventLabel']);
             for (var key in eventLabels){
               gtmVariables[key] = eventLabels[key];
             }
           } catch(e) {
-            // We have event without labels and others that are just strings
+            // report exception - we don't have Airbrake JS in the platform yet
           }
 
           gtmDataLayer.push(gtmVariables);
@@ -50,10 +50,10 @@ module Analytical
       def track(*args) # name, options, callback
         <<-JS.gsub(/^ {10}/, '')
           var gtmVariables = {};
-          
+
           gtmVariables.event = "Integration GA-GTM Track";
           gtmVariables['customTrackPageUrl'] = page;
-          
+
           gtmDataLayer.push(gtmVariables);
         JS
       end
