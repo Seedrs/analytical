@@ -54,6 +54,11 @@ module Analytical
           gtmVariables.event = "Integration GA-GTM Track";
           gtmVariables['customTrackPageUrl'] = page;
 
+          if (properties) {
+            gtmVariables['user_id'] = properties.user_id;
+            gtmVariables['session_id'] = properties.session_id;
+          }
+
           gtmDataLayer.push(gtmVariables);
         JS
       end
