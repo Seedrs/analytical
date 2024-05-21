@@ -12,7 +12,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Performancing Metrics -->
-      		<script type="text/javascript">
+      		<script type="text/javascript" nonce=#{csp_nonce}>
       		var clicky = { log: function(){ return; }, goal: function(){ return; }};
       		var clicky_site_id = #{options[:site_id]};
       		(function() {

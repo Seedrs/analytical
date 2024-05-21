@@ -12,7 +12,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Hubspot -->
-          <script type="text/javascript" language="javascript">
+          <script type="text/javascript" language="javascript" nonce=#{csp_nonce}>
           var hs_portalid=#{options[:portal_id]};
           var hs_salog_version = "2.00";
           var hs_ppa = "#{options[:domain]}";

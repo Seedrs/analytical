@@ -14,7 +14,7 @@ module Analytical
             when :body_prepend
               js = <<-HTML
               <!-- Analytical Init: ClickTale Top part -->
-              <script type="text/javascript">
+              <script type="text/javascript" nonce=#{csp_nonce}>
               var WRInitTime=(new Date()).getTime();
               </script>
               <!-- ClickTale end of Top part -->
@@ -24,14 +24,14 @@ module Analytical
               js = <<-HTML
               <!-- Analytical Init: ClickTale Bottom part -->
           		<div id="ClickTaleDiv" style="display: none;"></div>
-          		<script type='text/javascript'>
+          		<script type='text/javascript' nonce=#{csp_nonce}>
           		document.write(unescape("%3Cscript%20src='"+
           		 (document.location.protocol=='https:'?
           		  'https://clicktale.pantherssl.com/':
           		  'http://s.clicktale.net/')+
           		 "#{@options[:script_name] || "WRb6"}.js'%20type='text/javascript'%3E%3C/script%3E"));
           		</script>
-          		<script type="text/javascript">
+          		<script type="text/javascript" nonce=#{csp_nonce}>
           		var ClickTaleSSL=1;
           		if(typeof ClickTale=='function') ClickTale(#{@options[:project_id]},#{@options[:site_traffic]},\"#{@options[:www_param] || 'www'}\");
           		</script>

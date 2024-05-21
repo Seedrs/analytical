@@ -12,11 +12,11 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: LOOPFUSE TRACKING -->
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
           var LFHost = (("https:" == document.location.protocol) ? "https://" : "http://");
           document.write(unescape("%3Cscript src='" + LFHost + "lfov.net/webrecorder/js/listen.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
           _lf_cid = "#{options[:cid]}";
           _lf_remora();
           </script>

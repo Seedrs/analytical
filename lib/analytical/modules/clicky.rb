@@ -12,7 +12,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Clicky -->
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
             var clicky_site_ids = clicky_site_ids || [];
             clicky_site_ids.push(#{@options[:key]});
             (function() {
@@ -46,7 +46,7 @@ module Analytical
       def identify(id, *args)
         data = { :id=>id }.merge(args.first || {})
         code = <<-HTML
-        <script type='text/javascript'>
+        <script type='text/javascript' nonce=#{csp_nonce}>
           var clicky_custom_session = #{data.to_json};
         </script>
         HTML

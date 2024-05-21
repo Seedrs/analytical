@@ -52,14 +52,14 @@ module Analytical
       def initialize(_parent)
         @parent = _parent
       end
-      
+
       def method_missing(method, *args, &block)
         @parent.modules.values.collect do |m|
           m.send(method, *args) if m.respond_to?(method)
         end.delete_if{|c| c.blank?}.join("\n")
       end
     end
-    
+
     #
     # Returns a new delegation object for immediate processing of a command
     #
@@ -93,18 +93,20 @@ module Analytical
         init_javascript(:body_append),
         render_js_partial("analytical_fire_events")
       ]
-      
+
       js.delete_if{|s| s.blank?}.join("\n")
     end
 
     private
 
     def render_js_partial(name)
+      csp_nonce = options[:controller].send(:content_security_policy_nonce)
+
       if Gem::Version.new(::Rails::VERSION::STRING) >= Gem::Version.new('3.1.0')  # Rails 3.1 lets us override views in engines
-        options[:controller].send(:render_to_string, :partial=> name) if options[:controller]
+        options[:controller].send(:render_to_string, :partial=> name, :locals => { csp_nonce: csp_nonce }) if options[:controller]
       else # All other rails
         _partial_path = Pathname.new(__FILE__).dirname.join('..', '..', 'app/views/application', "_#{name}.html.erb").to_s
-        options[:controller].send(:render_to_string, :file=>_partial_path, :layout=>false) if options[:controller]
+        options[:controller].send(:render_to_string, :file=>_partial_path, :locals => { csp_nonce: csp_nonce }, :layout=>false) if options[:controller]
       end
     end
 

@@ -13,7 +13,7 @@ module Analytical
           code_url = "#{options[:key].to_s[0,4]}/#{options[:key].to_s[4,4]}"
           js = <<-HTML
           <!-- Analytical Init: CrazyEgg -->
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
           setTimeout(function(){var a=document.createElement("script");
           var b=document.getElementsByTagName("script")[0];
           a.src="//dnn506yrbagrg.cloudfront.net/pages/scripts/#{code_url}.js?"+Math.floor(new Date().getTime()/3600000);

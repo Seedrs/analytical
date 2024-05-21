@@ -2,7 +2,7 @@ module Analytical
   module Modules
     class Segment
       include Analytical::Modules::Base
-      
+
       def initialize(options={})
         super
         @tracking_command_location = :body_append
@@ -12,7 +12,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Segment -->
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
             (function(){
 
               // Create a queue, but don't obliterate an existing one!
@@ -46,7 +46,7 @@ module Analytical
                 'track',
                 'ready',
                 'alias',
-                'debug', 
+                'debug',
                 'page',
                 'once',
                 'off',

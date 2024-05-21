@@ -101,4 +101,3 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<growl>, [">= 0"])
   end
 end
-
