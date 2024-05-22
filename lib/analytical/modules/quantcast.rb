@@ -14,7 +14,7 @@ module Analytical
             when :head_append
             js = <<-HTML
             <!-- Analytical Head Init: Quantcast -->
-            <script type="text/javascript">
+            <script type="text/javascript" nonce=#{csp_nonce}>
               var _qevents = _qevents || [];
 
               (function() {
@@ -32,7 +32,7 @@ module Analytical
             when :body_append
             js = <<-HTML
             <!-- Analytical Body Init: Quantcast -->
-            <script type="text/javascript">
+            <script type="text/javascript" nonce=#{csp_nonce}>
               _qevents.push( { qacct:"#{options[:key]}"} );
               </script>
               <noscript>

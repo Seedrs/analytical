@@ -12,7 +12,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Sift Science -->
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
             var _sift = _sift || [];
             _sift.push(['_setAccount', '#{options[:key]}']);
 

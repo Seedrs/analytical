@@ -12,12 +12,12 @@ module Analytical
         init_location(location) do
           js = <<-HTML.gsub(/^ {10}/, '')
           <!-- Analytical Init: Google -->
-          <script>
+          <script nonce=#{csp_nonce}>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            
+
             ga('create', '#{options[:key]}', 'auto');#{linkid}
             var match = document.cookie.match(new RegExp('(^| )ignored_referrer=([^;]+)'));
             if (match && decodeURIComponent(match[2]) === document.referrer) {
@@ -27,7 +27,7 @@ module Analytical
             if(userId.length > 0) {
               ga('set', 'userId', userId);
             }
-            
+
             // Ensure hits are delivered even when the network request is being sent and the page
             // is being unloaded. This feature is only used when available.
             ga('set', 'transport', 'beacon');
@@ -54,7 +54,7 @@ module Analytical
           ga('send', 'event', options || {});
         JS
       end
-      
+
       def linkid
         if options[:linkid]
           "\n  ga('require', 'linkid', 'linkid.js');"
@@ -96,7 +96,7 @@ module Analytical
       #     end
       #   end
       # end
-      # 
+      #
       # # http://code.google.com/apis/analytics/docs/gaJS/gaJSApiEcommerce.html#_gat.GA_Tracker_._addTrans
       # # String orderId      Required. Internal unique order id number for this transaction.
       # # String affiliation  Optional. Partner or store affiliation (undefined if absent).
@@ -116,10 +116,10 @@ module Analytical
       #   data << "'#{city}'"
       #   data << "'#{state}'"
       #   data << "'#{country}'"
-      # 
+      #
       #   "_gaq.push(['_addTrans', #{data.join(', ')}]);"
       # end
-      # 
+      #
       # # http://code.google.com/apis/analytics/docs/gaJS/gaJSApiEcommerce.html#_gat.GA_Tracker_._addItem
       # # String orderId  Optional Order ID of the transaction to associate with item.
       # # String sku      Required. Item's SKU code.
@@ -131,7 +131,7 @@ module Analytical
       #   data  = "'#{order_id}', '#{sku}', '#{name}', '#{category}', '#{price}', '#{quantity}'"
       #   "_gaq.push(['_addItem', #{data}]);"
       # end
-      # 
+      #
       # # http://code.google.com/apis/analytics/docs/gaJS/gaJSApiEcommerce.html#_gat.GA_Tracker_._trackTrans
       # # Sends both the transaction and item data to the Google Analytics server.
       # # This method should be used in conjunction with the add_item and add_trans methods.

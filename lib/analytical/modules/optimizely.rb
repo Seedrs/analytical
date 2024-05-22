@@ -12,7 +12,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Optimizely -->
-          <script type="text/javascript">document.write(unescape("%3Cscript src='"+document.location.protocol+"//cdn.optimizely.com/js/#{options[:key]}.js' type='text/javascript'%3E%3C/script%3E"));</script>
+          <script type="text/javascript" nonce=#{csp_nonce}>document.write(unescape("%3Cscript src='"+document.location.protocol+"//cdn.optimizely.com/js/#{options[:key]}.js' type='text/javascript'%3E%3C/script%3E"));</script>
           HTML
           js
         end

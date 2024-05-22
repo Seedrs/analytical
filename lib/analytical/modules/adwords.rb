@@ -52,7 +52,7 @@ module Analytical
         if conversion = options[name.to_sym]
           conversion.symbolize_keys!
           js = <<-HTML
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
             /* <![CDATA[ */
             var google_conversion_id = #{conversion[:id]};
             var google_conversion_language = "#{conversion[:language]}";
@@ -62,7 +62,7 @@ module Analytical
             var google_conversion_value = #{data[:value] || conversion[:value]};
             /* ]]> */
           </script>
-          <script type="text/javascript" src="#{protocol}://www.googleadservices.com/pagead/conversion.js"></script>
+          <script type="text/javascript" nonce=#{csp_nonce} src="#{protocol}://www.googleadservices.com/pagead/conversion.js"></script>
           <noscript>
             <div style="display:inline;">
             <img height="1" width="1" style="border-style:none;" alt="" src="#{protocol}://www.googleadservices.com/pagead/conversion/#{conversion[:id]}/?label=#{conversion[:label]}&amp;guid=ON&amp;script=0"/>

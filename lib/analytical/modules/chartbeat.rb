@@ -14,13 +14,13 @@ module Analytical
             when :head_prepend
             js = <<-HTML
             <!-- Analytical Head Init: Chartbeat -->
-            <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
+            <script type="text/javascript" nonce=#{csp_nonce}>var _sf_startpt=(new Date()).getTime();</script>
             HTML
             js
             when :body_append
             js = <<-HTML
             <!-- Analytical Body Init: Chartbeat -->
-            <script type="text/javascript">
+            <script type="text/javascript" nonce=#{csp_nonce}>
               var _sf_async_config={uid:#{options[:key]}, domain:"#{options[:domain]}"};
               (function(){
                 function loadChartbeat() {

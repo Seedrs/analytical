@@ -12,7 +12,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Console -->
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
             if (typeof(console) !== 'undefined' && console != null) {
               console.log('Analytical Init: Console');
             }

@@ -12,7 +12,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Reinvigorate -->
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
             document.write(unescape("%3Cscript src='" + (("https:" == document.location.protocol) ? "https://ssl-" : "http://")
             + "include.reinvigorate.net/re_.js' type='text/javascript'%3E%3C/script%3E"));
           </script>

@@ -16,7 +16,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Gauges -->
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
             var _gauges = _gauges || [];
             (function() {
               var t   = document.createElement('script');

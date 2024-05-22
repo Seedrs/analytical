@@ -12,7 +12,7 @@ module Analytical
         init_location(location) do
           js = <<-HTML
           <!-- Analytical Init: Adroll -->
-          <script type="text/javascript">
+          <script type="text/javascript" nonce=#{csp_nonce}>
           adroll_adv_id = "#{options[:adv_id]}";
           adroll_pix_id = "#{options[:pix_id]}";
           (function () {

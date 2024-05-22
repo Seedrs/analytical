@@ -45,6 +45,10 @@ module Analytical
       # when the user logs out
       # def reset
 
+      def csp_nonce
+        options[:controller].send(:content_security_policy_nonce)
+      end
+
       def queue(*args)
         return if @command_store.include?(args)
         if args.first == :identify

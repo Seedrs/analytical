@@ -39,9 +39,9 @@ module Analytical
         if conversion = options[name.to_sym]
           conversion.symbolize_keys!
           js = <<-HTML
-          <script type="text/javascript">if (!window.mstag) mstag = {loadTag : function(){},time : (new Date()).getTime()};</script>
-          <script id="mstag_tops" type="text/javascript" src="//flex.atdmt.com/mstag/site/#{conversion[:id]}/mstag.js"></script>
-          <script type="text/javascript"> mstag.loadTag("conversion", {cp:"5050",dedup:"1"})</script>
+          <script type="text/javascript" nonce=#{csp_nonce}>if (!window.mstag) mstag = {loadTag : function(){},time : (new Date()).getTime()};</script>
+          <script id="mstag_tops" type="text/javascript" nonce=#{csp_nonce} src="//flex.atdmt.com/mstag/site/#{conversion[:id]}/mstag.js"></script>
+          <script type="text/javascript" nonce=#{csp_nonce}> mstag.loadTag("conversion", {cp:"5050",dedup:"1"})</script>
           <noscript>
             <iframe src="//flex.atdmt.com/mstag/tag/#{conversion[:id]}/conversion.html?cp=5050&dedup=1" frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden; display:none"></iframe>
           </noscript>
@@ -55,4 +55,3 @@ module Analytical
     end
   end
 end
-
