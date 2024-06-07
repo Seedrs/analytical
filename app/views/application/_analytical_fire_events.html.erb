@@ -2,19 +2,20 @@
 var commands;
 
 try {
-  commands = $.parseJSON(decodeURIComponent((Cookies.get('analytical') || '').replace(/\+/g, '%20')) || '[]');
+  commands = JSON.parse(decodeURIComponent((Cookies.get('analytical') || '').replace(/\+/g, '%20')) || '[]');
 } catch(e) {
   commands = [];
 }
 
 Cookies.remove('analytical', { path: '/' });
 
-$.each(commands, function(index, command) {
-  var method = command.shift(),
+for (var i = 0; i < commands.length; i++) {
+  var command = commands[i],
+      method = command.shift(),
       arguments = command;
 
   if ('function' === typeof Analytical[method]) {
     Analytical[method].apply(this, arguments);
   }
-});
+}
 </script>
